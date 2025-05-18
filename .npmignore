@@ -1,0 +1,31 @@
+# Development files
+.git/
+.github/
+.vscode/
+.idea/
+*.log
+*.pyc
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Project specific
+docs/
+tests/
+examples/
+output/
+tmp/
+
+# Nix
+shell.nix
+default.nix
+*.nix
+
+# Exclude large files and directories
+.git/
+node_modules/
+
+# Include necessary files
+!bin/
+!src/mcp/simple_server.py

@@ -1,0 +1,18 @@
+# Core Dependencies
+fastapi
+uvicorn
+python-dotenv
+requests
+openai
+anthropic
+
+# For PRD parsing (example, might need specific libraries like python-docx, beautifulsoup4, etc.)
+markdown
+beautifulsoup4
+
+# For CLI
+click
+
+# For testing
+pytest
+pytest-cov

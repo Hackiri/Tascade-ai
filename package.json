@@ -1,0 +1,49 @@
+{
+  "name": "tascade-ai",
+  "version": "0.2.2",
+  "description": "AI-powered task management system for project planning and execution",
+  "main": "bin/tascade-cli.js",
+  "bin": {
+    "tascade-ai": "bin/tascade-cli.js",
+    "tascade-cli": "bin/tascade-cli.js"
+  },
+  "scripts": {
+    "start": "node bin/tascade-cli.js",
+    "test": "node test/basic.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hackiri/tascade-aI.git"
+  },
+  "keywords": [
+    "task-management",
+    "ai",
+    "project-planning",
+    "time-tracking",
+    "mcp",
+    "windsurf"
+  ],
+  "author": "Hackiri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Hackiri/tascade-aI/issues"
+  },
+  "homepage": "https://github.com/Hackiri/tascade-aI#readme",
+  "dependencies": {
+    "boxen": "^8.0.1",
+    "chalk": "^5.4.1",
+    "cli-table3": "^0.6.5",
+    "commander": "^11.1.0",
+    "dotenv": "^16.5.0",
+    "gradient-string": "^3.0.0",
+    "inquirer": "^9.3.7",
+    "node-fetch": "^3.3.2",
+    "ora": "^7.0.1",
+    "uuid": "^11.1.0",
+    "ws": "^8.18.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "type": "module"
+}

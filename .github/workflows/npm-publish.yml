@@ -1,0 +1,75 @@
+name: Publish to npm
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+      
+      - name: Install dependencies
+        run: npm ci || npm install
+      
+      - name: Check package version
+        id: check
+        run: |
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          PUBLISHED_VERSION=$(npm view tascade-ai version 2>/dev/null || echo "0.0.0")
+          if [ "$(printf '%s\n' "$PUBLISHED_VERSION" "$PACKAGE_VERSION" | sort -V | head -n1)" != "$PACKAGE_VERSION" ]; then
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+            echo "Package version $PACKAGE_VERSION is newer than published version $PUBLISHED_VERSION. Will publish."
+          else
+            echo "should_publish=false" >> $GITHUB_OUTPUT
+            echo "Package version $PACKAGE_VERSION is not newer than published version $PUBLISHED_VERSION. Skipping publish."
+          fi
+      
+      - name: Copy README for npm
+        run: cp NPM_README.md README.md
+      
+      - name: Publish to npm
+        if: steps.check.outputs.should_publish == 'true'
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  notify:
+    needs: build
+    if: success() && github.event_name == 'release'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Notify about successful publish
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { owner, repo } = context.repo;
+            const release = context.payload.release;
+            
+            if (!release) {
+              console.log('No release information found in context');
+              return;
+            }
+            
+            try {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: release.id,
+                body: `🎉 Successfully published to npm! You can now use it with \`npx tascade-ai\``
+              });
+            } catch (error) {
+              console.log(`Error creating comment: ${error.message}`);
+            }

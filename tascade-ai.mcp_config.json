@@ -1,0 +1,20 @@
+{
+    "mcpServers": {
+        "tascade-ai": {
+            "command": "python",
+            "args": [
+                "-m",
+                "src.integrations.mcp_server"
+            ],
+            "env": {
+                "PYTHONPATH": ""
+            },
+            "workingDirectory": "${workspaceFolder}",
+            "port": 3838,
+            "timeout": 30000,
+            "enabled": true,
+            "description": "Tascade AI: AI-Powered Task Management.",
+            "toolSpecVersion": "0.1.0"
+        }
+    }
+}
