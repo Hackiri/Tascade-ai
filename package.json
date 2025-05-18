@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Hackiri/tascade-aI.git"
+    "url": "git+https://github.com/Hackiri/Tascade-ai.git"
   },
   "keywords": [
     "task-management",
@@ -26,9 +26,9 @@
   "author": "Hackiri",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Hackiri/tascade-aI/issues"
+    "url": "https://github.com/Hackiri/Tascade-ai/issues"
   },
-  "homepage": "https://github.com/Hackiri/tascade-aI#readme",
+  "homepage": "https://github.com/Hackiri/Tascade-ai#readme",
   "dependencies": {
     "boxen": "^8.0.1",
     "chalk": "^5.4.1",
