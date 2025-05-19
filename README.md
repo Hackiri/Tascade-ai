@@ -1,5 +1,7 @@
 # Tascade AI (Pre-release)
 
+> **Last Updated:** May 18, 2025
+
 > **Note:** Tascade AI is currently in pre-release. While functional, it may contain bugs or incomplete features. We welcome feedback and contributions!
 
 Tascade AI is an advanced AI-powered task management system designed for project planning and execution. It combines the best features of leading task management tools to provide a comprehensive solution for AI-assisted development.
