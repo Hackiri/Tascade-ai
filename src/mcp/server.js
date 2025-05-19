@@ -7,7 +7,7 @@
  * and incorporates best practices for MCP server design.
  */
 
-import WebSocket from 'ws';
+import { WebSocketServer } from 'ws';
 import { EventEmitter } from 'events';
 import path from 'path';
 import fs from 'fs';
@@ -329,7 +329,7 @@ class TascadeMCPServer extends EventEmitter {
   async start() {
     return new Promise((resolve, reject) => {
       try {
-        this.server = new WebSocket.Server({ port: this.options.port });
+        this.server = new WebSocketServer({ port: this.options.port });
         
         this.server.on('connection', this.handleConnection);
         
