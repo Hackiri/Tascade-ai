@@ -509,9 +509,9 @@ async def prepare_ai_decomposition_calls_endpoint(request: AIDecompositionPrepar
 
     active_rules = [rule for rule in task_manager.list_project_rules() if rule.is_active]
     
-    # Assuming taskmaster-ai is the server name configured for decomposition
+    # Assuming tascade-ai is the server name configured for decomposition
     # This could be made configurable if needed.
-    decomposer = AIDecomposer(task_manager_mcp_server_name="taskmaster-ai") 
+    decomposer = AIDecomposer(task_manager_mcp_server_name="tascade-ai") 
 
     try:
         mcp_call_sequence_raw = decomposer.prepare_mcp_calls_for_decomposition(

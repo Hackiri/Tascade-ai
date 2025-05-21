@@ -17,12 +17,12 @@ class AIDecomposer:
     Handles the decomposition of tasks using an AI model via an MCP server.
     """
 
-    def __init__(self, task_manager_mcp_server_name: str = "taskmaster-ai"):
+    def __init__(self, task_manager_mcp_server_name: str = "tascade-ai"):
         """
         Initializes the AIDecomposer.
 
         Args:
-            task_manager_mcp_server_name: The name of the MCP server to use for task operations (e.g., taskmaster-ai).
+            task_manager_mcp_server_name: The name of the MCP server to use for task operations (e.g., tascade-ai).
         """
         self.task_manager_mcp_server_name = task_manager_mcp_server_name
 
@@ -80,7 +80,7 @@ class AIDecomposer:
         Prepares the sequence of MCP tool call configurations needed to decompose a task.
 
         This involves:
-        1. Adding a temporary task to the task_manager_mcp_server (e.g., taskmaster-ai).
+        1. Adding a temporary task to the task_manager_mcp_server (e.g., tascade-ai).
         2. Expanding this temporary task using the task_manager_mcp_server's LLM capabilities.
         3. (Implicitly, the caller will later handle removing the temporary task).
 
@@ -88,7 +88,7 @@ class AIDecomposer:
             parent_task_for_decomposition: The Tascade AI task to decompose.
             active_rules: A list of active project rules to guide decomposition.
             custom_instructions: Optional user-provided instructions.
-            project_root: The root directory of the project, required by taskmaster-ai tools.
+            project_root: The root directory of the project, required by tascade-ai tools.
 
         Returns:
             A list of dictionaries, where each dictionary defines an MCP tool call
@@ -97,16 +97,16 @@ class AIDecomposer:
         """
         if not project_root:
             # In a real scenario, project_root might be dynamically determined or configured.
-            # For now, it's a required parameter for taskmaster-ai tools.
+            # For now, it's a required parameter for tascade-ai tools.
             # We might need a way to get this from the environment or CLI context.
-            # raise ValueError("project_root must be provided for taskmaster-ai tools.")
+            # raise ValueError("project_root must be provided for tascade-ai tools.")
             # For now, we'll rely on the caller to pass it or the main agent to inject it.
             pass 
 
         mcp_calls = []
 
         # Step 1: Prepare mcp3_add_task call for a temporary placeholder task
-        # The description for this temporary task in taskmaster-ai can be minimal,
+        # The description for this temporary task in tascade-ai can be minimal,
         # as the full context will be in the prompt for mcp3_expand_task.
         temp_task_title = f"[TEMP] Decompose: {parent_task.title[:50]}" 
         temp_task_description = f"Temporary placeholder task for AI decomposition of Tascade AI task ID: {parent_task.id}"
@@ -120,7 +120,7 @@ class AIDecomposer:
         mcp_calls.append({
             "tool_name": "mcp3_add_task", 
             "params": add_task_params,
-            "purpose": "Create temporary task in taskmaster-ai for decomposition"
+            "purpose": "Create temporary task in tascade-ai for decomposition"
         })
 
         # Step 2: Prepare mcp3_expand_task call
@@ -225,7 +225,7 @@ if __name__ == '__main__':
         tags=['security', 'auth'], is_active=True, created_at=datetime.now()
     )
 
-    decomposer = AIDecomposer(task_manager_mcp_server_name="taskmaster-ai")
+    decomposer = AIDecomposer(task_manager_mcp_server_name="tascade-ai")
     
     # 1. Construct the prompt (internal method, but shown for clarity)
     prompt = decomposer._construct_llm_prompt(parent_task_example, [rule1], "Ensure subtasks are backend focused first.")

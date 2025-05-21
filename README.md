@@ -279,7 +279,7 @@ For detailed documentation on the CLI, see:
 
 **AI-Powered Task Decomposition (CLI):**
 
-This feature allows you to use AI to break down an existing task into smaller, actionable subtasks. The CLI command simulates the interaction with the AI backend (`taskmaster-ai` MCP server).
+This feature allows you to use AI to break down an existing task into smaller, actionable subtasks. The CLI command simulates the interaction with the AI backend (`tascade-ai` MCP server).
 
 *   **Decomposing a task:**
     ```bash
@@ -302,7 +302,7 @@ This feature allows you to use AI to break down an existing task into smaller, a
 **How AI Decomposition Works (CLI Simulation):**
 
 1.  The command identifies the parent task and any active project rules.
-2.  It prepares the necessary information for the AI (simulating calls to the `taskmaster-ai` MCP server).
+2.  It prepares the necessary information for the AI (simulating calls to the `tascade-ai` MCP server).
 3.  The AI (simulated in the CLI) suggests a list of subtasks.
 4.  You will be shown these suggested subtasks and asked for confirmation:
     ```

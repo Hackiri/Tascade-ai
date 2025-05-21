@@ -466,7 +466,7 @@ def decompose_task(task_manager: TaskManager, task_id: str, instructions: Option
     if active_rules:
         click.echo(f"Considering {len(active_rules)} active project rules for decomposition.")
 
-    decomposer = AIDecomposer(task_manager_mcp_server_name="taskmaster-ai")
+    decomposer = AIDecomposer(task_manager_mcp_server_name="tascade-ai")
     
     mcp_call_sequence = decomposer.prepare_mcp_calls_for_decomposition(
         parent_task,
@@ -523,7 +523,7 @@ def decompose_task(task_manager: TaskManager, task_id: str, instructions: Option
 
     if not parsed_subtasks:
         click.echo(click.style("AI did not suggest any subtasks.", fg="yellow"))
-        # Attempt to clean up the temporary task in taskmaster-ai if it was created
+        # Attempt to clean up the temporary task in tascade-ai if it was created
         if temp_task_master_id:
             click.echo(f"  3. Would call MCP tool: mcp3_remove_task on server '{decomposer.task_manager_mcp_server_name}' with ID {temp_task_master_id} for cleanup.")
         return
@@ -536,7 +536,7 @@ def decompose_task(task_manager: TaskManager, task_id: str, instructions: Option
     
     if not click.confirm(click.style("\nDo you want to add these subtasks?", fg="blue"), default=True):
         click.echo("Subtask addition aborted by user.")
-        # Attempt to clean up the temporary task in taskmaster-ai
+        # Attempt to clean up the temporary task in tascade-ai
         if temp_task_master_id:
             click.echo(f"  3. Would call MCP tool: mcp3_remove_task on server '{decomposer.task_manager_mcp_server_name}' with ID {temp_task_master_id} for cleanup.")
         return
