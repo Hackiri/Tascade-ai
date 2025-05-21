@@ -6,6 +6,16 @@
 
 Tascade AI is an advanced AI-powered task management system designed for project planning and execution. It combines the best features of leading task management tools to provide a comprehensive solution for AI-assisted development.
 
+## Project Origins
+
+Tascade AI was created by building upon and integrating the strengths of two powerful task management systems:
+
+* **taskmaster-ai**: We leveraged taskmaster-ai's robust task decomposition capabilities and MCP integration to enhance our AI-powered planning features. The task expansion and complexity assessment features were particularly influential in shaping Tascade AI's approach to breaking down complex tasks.
+
+* **mcp-shrimp-task-manager**: Our task planning system draws inspiration from mcp-shrimp-task-manager's structured execution plans, resource allocation, and risk assessment methodologies. This influence can be seen in Tascade AI's comprehensive task lifecycle management.
+
+By combining these systems and adding our own innovations, we've created Tascade AI to provide an integrated approach to AI-assisted project management.
+
 ## Features
 
 *   **Unified Task Management Core:** Robust system for defining, tracking, and managing development tasks.
