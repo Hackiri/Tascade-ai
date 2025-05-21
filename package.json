@@ -1,6 +1,6 @@
 {
   "name": "tascade-ai",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "AI-powered task management system for project planning and execution",
   "main": "bin/tascade-cli.js",
   "bin": {
