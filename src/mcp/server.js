@@ -43,7 +43,7 @@ class TascadeMCPServer extends EventEmitter {
     const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
     
     this.options = {
-      port: options.port || parseInt(process.env.MCP_PORT || '8767', 10),
+      port: options.port !== undefined ? options.port : parseInt(process.env.MCP_PORT || '8767', 10),
       name: options.name || 'Tascade AI MCP Server',
       version: options.version || packageJson.version || '1.0.0'
     };
@@ -518,6 +518,16 @@ class TascadeMCPServer extends EventEmitter {
  */
 async function main() {
   try {
+    // Parse command-line arguments
+    let port = process.env.MCP_PORT || '8767'; // Default port
+    
+    // Check for --port argument in process.argv
+    const portArgIndex = process.argv.indexOf('--port');
+    if (portArgIndex !== -1 && portArgIndex < process.argv.length - 1) {
+      port = process.argv[portArgIndex + 1];
+      console.log(`Using port from command-line argument: ${port}`);
+    }
+    
     // Create database connection (placeholder for now)
     const dbConnection = {
       getTask: async (id) => {
@@ -554,8 +564,10 @@ async function main() {
       }
     };
     
-    // Create and start the server
-    const server = new TascadeMCPServer()
+    // Create and start the server with the specified port
+    const server = new TascadeMCPServer({
+      port: parseInt(port, 10)
+    })
       .setDatabase(dbConnection)
       .registerMCPServer(mcpServerInstance);
     

@@ -1,5 +1,7 @@
 # Tascade AI
 
+> **Last Updated:** May 21, 2025
+
 Tascade AI is an advanced AI-powered task management system designed for project planning and execution. It combines the best features of leading task management tools to provide a comprehensive solution for AI-assisted development.
 
 ## Quick Start with npx
@@ -7,7 +9,7 @@ Tascade AI is an advanced AI-powered task management system designed for project
 You can use Tascade AI without installing it by using `npx`:
 
 ```bash
-# Start the Tascade AI MCP server
+# Start the Tascade AI MCP server (runs on port 8766 by default)
 npx tascade-ai mcp
 
 # Manage tasks
@@ -50,11 +52,14 @@ tascade-ai --help
 Tascade AI includes a Model Context Protocol (MCP) server that allows integration with IDEs and other development tools:
 
 ```bash
-# Start the MCP server
+# Start the MCP server (default port is 8766)
+npx tascade-ai mcp
+
+# Or specify a custom port
 npx tascade-ai mcp --port 8765
 ```
 
-Connect to the WebSocket server at `ws://localhost:8765` and send commands in JSON format:
+Connect to the WebSocket server at the specified port (e.g., `ws://localhost:8766`) and send commands in JSON format:
 
 ```json
 {
@@ -121,8 +126,53 @@ npx tascade-ai track --list
 ### MCP Server
 
 ```bash
-# Start the MCP server
+# Start the MCP server with default settings
+npx tascade-ai mcp
+
+# Start with a custom port
 npx tascade-ai mcp --port 8765
+
+# Check MCP server status
+npx tascade-ai mcp-status
+```
+
+## Environment Variables
+
+Tascade AI supports configuration through environment variables. Create a `.env` file in your project root based on the example below:
+
+```
+# API Keys (Required for AI task generation)
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+PERPLEXITY_API_KEY=your_perplexity_api_key_here
+OPENAI_API_KEY=your_openai_api_key_here
+
+# AI Model Configuration
+MODEL=claude-3-7-sonnet-20250219
+PERPLEXITY_MODEL=sonar-pro
+MAX_TOKENS=64000
+TEMPERATURE=0.2
+
+# Task Generation Defaults
+DEFAULT_SUBTASKS=5
+DEFAULT_PRIORITY=medium
+
+# MCP Server Configuration
+MCP_PORT=8766
+
+# Debug Mode (set to true for verbose logging)
+DEBUG=false
+```
+
+## Development with nix-shell
+
+For development environments with Nix package manager, you can use the provided `shell.nix` file:
+
+```bash
+# Start a nix-shell with all dependencies
+nix-shell shell.nix
+
+# Run the MCP server within the nix-shell
+node bin/tascade-cli.js mcp
 ```
 
 ## License

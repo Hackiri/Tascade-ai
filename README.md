@@ -1,6 +1,6 @@
 # Tascade AI (Pre-release)
 
-> **Last Updated:** May 18, 2025
+> **Last Updated:** May 21, 2025
 
 > **Note:** Tascade AI is currently in pre-release. While functional, it may contain bugs or incomplete features. We welcome feedback and contributions!
 
@@ -72,7 +72,7 @@ You can use Tascade AI either via npm (recommended for most users) or by cloning
 Tascade AI is available as an npm package, which means you can use it without installing anything using `npx`:
 
 ```bash
-# Start the Tascade AI MCP server
+# Start the Tascade AI MCP server (runs on port 8766 by default)
 npx tascade-ai mcp
 
 # Manage tasks
@@ -94,7 +94,21 @@ npm install -g tascade-ai
 tascade-ai --help
 ```
 
-### Option 2: From Source (Recommended for Developers)
+### Option 2: Using nix-shell (Recommended for Development Environments)
+
+If you have Nix package manager installed, you can use the provided `shell.nix` file to set up a consistent development environment:
+
+```bash
+# Start a nix-shell with all dependencies
+nix-shell shell.nix
+
+# Run the MCP server within the nix-shell
+node bin/tascade-cli.js mcp
+```
+
+This method ensures all dependencies are correctly installed and managed by the Nix package manager.
+
+### Option 3: From Source (Alternative for Developers)
 
 #### Prerequisites
 
@@ -199,6 +213,11 @@ tascade-ai track --list
 ### Server Management
 
 ```bash
+# Start the MCP server
+tascade-ai mcp
+
+# Check MCP server status
+tascade-ai mcp-status
 # Start the Tascade AI server
 tascade-ai start
 
@@ -363,7 +382,7 @@ nix-shell mcp-shell.nix --run "python src/mcp/simple_server.py"
 
 2. **Connect to the MCP Server:**
 
-Connect to the WebSocket server at `ws://localhost:8765` and send commands in JSON format:
+Connect to the WebSocket server at `ws://localhost:8766` and send commands in JSON format:
 
 ```json
 {
